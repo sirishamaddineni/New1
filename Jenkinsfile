@@ -4,10 +4,10 @@ pipeline {
     stages 
 	{
 		stage( 'Checkout Source' ) 
-		{
 		//Checkout source code from GIT
 		  steps
 		  {
+		{
 			// workaround to get GIT plugin environment Variables, we need to collect the checkout command output, which is a map that contains them
 			// https://issues.jenkins-ci.org/browse/JENKINS-35230
 			  script
@@ -28,17 +28,10 @@ pipeline {
 		//Build source code
 		  steps
 		  {
-			bat "\"${tool 'MsBuild 14.0'}\" NunitDemo.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"   
+			bat "\"${tool 'MSBuild 14'}\" NunitDemo.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"   
 			}
 		}//End Build source code 
 		
-		stage( 'Check Policy' ) 
-		{
-		//Check policy
-		  steps
-		  {
-			nexusPolicyEvaluation failBuildOnNetworkError: false, iqApplication: 'DemoNunit', iqStage: 'build', jobCredentialsId: ''
-			}
-		}//End Check policy		
+			
 	}
 }
