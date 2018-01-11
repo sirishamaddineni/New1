@@ -32,13 +32,6 @@ pipeline {
 			}
 		}//End Build source code 
 		
-		stage( 'Check Policy' ) 
-		{
-		//Check policy
-		  steps
-		  {
-			nexusPolicyEvaluation failBuildOnNetworkError: false, iqApplication: 'DemoNunit', iqStage: 'build', jobCredentialsId: ''
-			}
-		}//End Check policy		
+				
 	}
 }
