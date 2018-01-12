@@ -50,7 +50,30 @@ pipeline {
 			bat '"C:\\Program Files\\7-Zip\\7z.exe" a  -r DemoNunit.zip -w NunitDemo.Test\\bin\\Release\\* -mem=AES256'
 			}
 		}//End Build source code 	
+		stage( "IQ Scans") {
+		  steps{
+			bat "echo 'Uploading to IQ: ${NEXUS_ARTIFACTID} stage: ${NEXUS_IQ_STAGE} file: ${ARTIFACT_FILENAME}'"
+			nexusPolicyEvaluation failBuildOnNetworkError: false,
+				iqApplication: NEXUS_ARTIFACTID,
+				iqScanPatterns: [[scanPattern: ARTIFACT_FILENAME ]],
+				iqStage: NEXUS_IQ_STAGE,
+				jobCredentialsId: ''
+		  }
+		} // stage	
 		
+		stage( "Upload to Nexus" ) {
+		  steps{	
+			  nexusArtifactUploader artifacts: [[artifactId: 'DemoNunit', classifier: '', file: 'DemoNunit.zip', type: '.zip']], 
+			  credentialsId: 'zil341Credentials', 
+			  groupId: 'nuget-group', 
+			  nexusUrl: 'zil341:9084', 
+			  nexusVersion: 'nexus3', 
+			  protocol: 'http', 
+			  repository: 'NuGet_NUnitTestProject', 
+			  version: '2.33'			 
+		  }
+		}
+
 
 				
 	}
