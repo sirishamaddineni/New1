@@ -66,7 +66,7 @@ pipeline {
                 	 bat "git config user.email 'sirishamaddineni25@gmail.com'"
                          bat "git config user.name 'sirishamaddineni'"	
 			bat "git tag -a v20.0 -m 'tags created'"
-    bat "git push 'sirishamaddineni':'t5aXaeg' 'https://github.com/sirishamaddineni/New1' --tags")
+    bat "git push 'sirishamaddineni' 't5aXaeg' 'https://github.com/sirishamaddineni/New1' --tags")
     }
     } // stage
 
