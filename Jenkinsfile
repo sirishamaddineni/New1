@@ -62,8 +62,8 @@ pipeline {
 		} // stage	
 		stage ( "Tagging" ){
                 steps {
-                         bat "git tag 'v13.0'"
-                bat "git push origin 'v13.0'"
+                         bat "git tag 'v14.0'"
+                bat "git push origin 'v14.0'"
     }
     } // stage
 
