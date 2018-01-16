@@ -60,6 +60,18 @@ pipeline {
 				jobCredentialsId: ''
 		  }
 		} // stage	
-				
+		stage( "Upload to Nexus" ) {
+		  steps{	
+			  nexusArtifactUploader artifacts: [[artifactId: 'DemoNunit', classifier: '', file: 'DemoNunit.zip', type: '.zip']], 
+			  credentialsId: 'nexusRepoCredentials', 
+			  groupId: 'nuget-hosted', 
+			  nexusUrl: 'http://localhost:8070', 
+			  nexusVersion: 'nexus3', 
+			  protocol: 'http', 
+			  repository: 'NewRepo', 
+			  version: '2.33'			 
+		  }
+		}
+		
 	}
 }
