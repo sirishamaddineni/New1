@@ -61,11 +61,13 @@ pipeline {
 		  }
 		} // stage	
 		stage ( "Tagging" ){                	  
- 			steps{
-			//echo 'Tagging this version and pushing tag to remote repository'
-			bat "git tag 'v18.0'"				
-			bat "git push origin 'v18.0'"						
-		  }
+ 			steps {
+                         bat "git tag 'v18.0'"
+                	 bat "git config user.email 'sirishamaddineni25@gmail.com'"
+                         bat "git config user.name 'sirishamaddineni'"	
+			  
+			        					
+		}
     		} // stage
 	}
 }
