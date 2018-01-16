@@ -63,7 +63,7 @@ pipeline {
 		stage ( "Tagging" ){
                 steps {
                          bat "git tag 'v12.0'"
-               
+                bat "git push :origin refs/tags/'v12.0'"
     }
     } // stage
 
