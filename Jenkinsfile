@@ -60,7 +60,7 @@ pipeline {
 				jobCredentialsId: ''
 		  }
 		} // stage	
-		post {
+		stage {
     success {
       //  slackSend color: '#00ff00', message: 'OnlineBind UI Build Success'
       // trigger downstream job to deploy to DEV1
@@ -69,7 +69,7 @@ pipeline {
     
     } // end success
 
-  }//end post steps
+  }//end  stage
 		
 	}
 }
