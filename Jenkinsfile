@@ -52,11 +52,11 @@ pipeline {
 		}//End Build source code 	
 		stage( "IQ Scans") {
 		  steps{
-			bat "echo 'Uploading to IQ: ${DemoNunit.zip} stage: ${Build} file: ${ARTIFACT_FILENAME}'"
+			bat "echo 'Uploading to IQ: 'DemoNunit.zip' stage: 'release' file: 'DemoNuint.zip'"
 			nexusPolicyEvaluation failBuildOnNetworkError: false,
-				iqApplication: DemoNunit.zip,
-				iqScanPatterns: [[scanPattern: ARTIFACT_FILENAME ]],
-				iqStage: Build,
+				iqApplication: 'IQ_app',
+				iqScanPatterns: [[scanPattern: 'DemoNunit.zip' ]],
+				iqStage: 'release',
 				jobCredentialsId: ''
 		  }
 		} // stage	
@@ -64,12 +64,12 @@ pipeline {
 		stage( "Upload to Nexus" ) {
 		  steps{	
 			  nexusArtifactUploader artifacts: [[artifactId: 'DemoNunit', classifier: '', file: 'DemoNunit.zip', type: '.zip']], 
-			  credentialsId: 'zil341Credentials', 
+			  credentialsId: 'nexusRepoCredentials', 
 			  groupId: 'nuget-group', 
-			  nexusUrl: 'zil341:9084', 
+			  nexusUrl: 'http://localhost:9091', 
 			  nexusVersion: 'nexus3', 
 			  protocol: 'http', 
-			  repository: 'NuGet_NUnitTestProject', 
+			  repository: 'NewRepo', 
 			  version: '2.33'			 
 		  }
 		}
