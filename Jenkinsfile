@@ -60,29 +60,6 @@ pipeline {
 				jobCredentialsId: ''
 		  }
 		} // stage	
-		catch (e) {
-// If there was an exception thrown, the build failed
-currentBuild.result = "FAILED"
-throw e
-} finally {
-// Success or failure, always send notifications
-notifyBuild(currentBuild.result)
-}
-
-
-def notifyBuild(String buildStatus = 'STARTED') {
-// build status of null means successful
-buildStatus =  buildStatus ?: 'SUCCESSFUL'
-
-emailext(
-  to: 'sirishamaddineni25@gmail.com',
-  subject: "${buildStatus}: Job '${env.Poc} [${env.20}]'",
-  body: "details",
-  recipientProviders: [[$class: 'sirishamaddineni25@gmail.com']]
-)
-}
-
-
 				
 	}
 }
