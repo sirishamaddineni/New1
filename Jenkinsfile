@@ -62,7 +62,7 @@ pipeline {
 		} // stage	
 		stage ( "Tagging" ){
                 steps {
-                         bat "git tag -d 'v12.0'"
+                         bat "git tag 'v12.0'"
                
     }
     } // stage
