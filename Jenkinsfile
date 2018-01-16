@@ -62,10 +62,15 @@ pipeline {
 		} // stage	
 		stage ( "Tagging" ){
                 steps {
-                         bat "git tag 'v17.0'"
-                	 bat "git config user.email 'sirishamaddineni25@gmail.com'"
-                         bat "git config user.name 'sirishamaddineni'"	
-			
+                         //bat "git tag 'v17.0'"
+                	 //bat "git config user.email 'sirishamaddineni25@gmail.com'"
+                         //bat "git config user.name 'sirishamaddineni'"	
+			  
+			bat "git tag -a 'v17.0' -m 'Release Candidate v17.0' "
+        			sshagent(["ssh-git-key"]) {
+          			bat "git push git@github.com:'sirishamaddineni/New1'.git --tags"
+        		}
+
        }
     } // stage
 
