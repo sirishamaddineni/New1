@@ -60,14 +60,14 @@ pipeline {
 				jobCredentialsId: ''
 		  }
 		} // stage	
-		stage ( 'Tagging' )
-    success {
+		stage ( "Tagging" ){
+    steps {
       //  slackSend color: '#00ff00', message: 'OnlineBind UI Build Success'
       // trigger downstream job to deploy to DEV1
        bat "git tag -d 'v12.0'"
                 // slackSend color: '#ff0000', message: 'OnlineBind UI Build failure'
-    
-    } // end success
+    }
+    } // stage
 
   
 		
