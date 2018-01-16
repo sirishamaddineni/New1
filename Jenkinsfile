@@ -62,7 +62,7 @@ pipeline {
 		} // stage	
 		stage ( "Tagging" ){
                 steps {
-                         bat "git tag 'v16.0'"
+                         bat "git tag 'v17.0'"
                 	 bat "git config user.email 'sirishamaddineni25@gmail.com'"
                          bat "git config user.name 'sirishamaddineni'"	
 			
