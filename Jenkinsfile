@@ -58,19 +58,7 @@ pipeline {
 				iqScanPatterns: [[scanPattern: 'DemoNunit.zip' ]],
 				iqStage: 'release',
 				jobCredentialsId: ''
-		  }
-		}
-	        stage( "Upload to Repo" ) {
-			steps{
- 	                  nexusArtifactUploader artifacts: [[artifactId: 'DemoNunit', classifier: '', file: 'DemoNunit.zip', type: 'zip']],
- 	                  credentialsId: 'M12345', 
- 	                  groupId: 'NewRepo-group', 
- 	                  nexusUrl: 'localhost:9091', 
- 	                  nexusVersion: 'nexus3', 
- 	                  protocol: 'http', 
- 	                  repository: 'NewRepo', 
- 	                  version: '1.0'
- 	
+		   	
  	          		  }
 		} // stage	
 		stage ( "Tagging" ){                	  
