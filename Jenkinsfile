@@ -59,10 +59,23 @@ pipeline {
 				iqStage: 'release',
 				jobCredentialsId: ''
      		   }
-		} // stage	
+		} // stage
+		stage( "Upload to Repo" ){
+ 	         
+                       steps { 	              
+                            nexusArtifactUploader artifacts: [[artifactId: 'DemoNunit', classifier: '', file: 'DemoNunit.zip', type: 'zip']
+                            credentialsId: 'NexusRepoCredentials', 
+                            groupId: 'NewRepo-group',           
+                            nexusUrl: 'localhost:9091', 
+                            nexusVersion: 'nexus3', 
+                            protocol: 'http', 
+                            repository: 'NewRepo', 
+                            version: '1.0'
+				  }
+		}
 		stage ( "Tagging" ){                	  
  			steps {
-                         bat "git tag 'v20.0'"
+                         bat "git tag 'v21.0'"
                 	 bat "git config user.email 'sirishamaddineni25@gmail.com'"
                          bat "git config user.name 'sirishamaddineni'"	
 			  
