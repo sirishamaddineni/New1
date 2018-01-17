@@ -58,8 +58,8 @@ pipeline {
 				iqScanPatterns: [[scanPattern: 'DemoNunit.zip' ]],
 				iqStage: 'release',
 				jobCredentialsId: ''
-		   	
- 	          		  }
+		   	 	          		 
+		  }
 		} // stage	
 		stage ( "Tagging" ){                	  
  			steps {
