@@ -58,11 +58,22 @@ pipeline {
 				iqScanPatterns: [[scanPattern: 'DemoNunit.zip' ]],
 				iqStage: 'release',
 				jobCredentialsId: ''
-		  }
+	        stage("Upload to Repo"){
+ 	           steps{
+ 	                  nexusArtifactUploader artifacts: [[artifactId: 'DemoNunit', classifier: '', file: 'DemoNunit.zip', type: 'zip']],
+ 	                  credentialsId: 'M12345', 
+ 	                  groupId: 'Repo-group', 
+ 	                  nexusUrl: 'localhost:9091', 
+ 	                  nexusVersion: 'nexus3', 
+ 	                  protocol: 'http', 
+ 	                  repository: 'Repo', 
+ 	                  version: '1.0'
+ 	
+ 	          		  }
 		} // stage	
 		stage ( "Tagging" ){                	  
  			steps {
-                         bat "git tag 'v18.0'"
+                         bat "git tag 'v19.0'"
                 	 bat "git config user.email 'sirishamaddineni25@gmail.com'"
                          bat "git config user.name 'sirishamaddineni'"	
 			  
