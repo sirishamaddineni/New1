@@ -58,6 +58,8 @@ pipeline {
 				iqScanPatterns: [[scanPattern: 'DemoNunit.zip' ]],
 				iqStage: 'release',
 				jobCredentialsId: ''
+		  }
+		}
 	        stage("Upload to Repo"){
  	           steps{
  	                  nexusArtifactUploader artifacts: [[artifactId: 'DemoNunit', classifier: '', file: 'DemoNunit.zip', type: 'zip']],
