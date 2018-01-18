@@ -54,7 +54,7 @@ pipeline {
 		}//End Build source code
 		stage ( " Tagging " ){                	  
  			steps {
-			       bat "git tag 'v21.9'"
+			       bat "git tag 'v21.10'"
                                bat "git config user.email 'sirishamaddineni25@gmail.com'"
                                bat "git config user.name 'sirishamaddineni'"	
 			}
@@ -82,5 +82,14 @@ pipeline {
 		version: '1.0'
 		}
 	}
-	}
+	stage ( 'email' )
+		{
+                 step {
+                failure {
+                mail to: 'sirishamaddineni25@gmail.com',
+             subject: "Failed Pipeline: 'currentBuild.Poc'",
+             body: "Something is wrong with 'env.http://localhost:8080/job/Poc/'"
+    }
 }
+	}
+	}
