@@ -31,6 +31,7 @@ pipeline {
 			bat "\"${tool 'MSBuild 14'}\" NunitDemo.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"   
 			}
 		}//End Build source code 
+		
 		stage( 'Test' ) 
 		{
 		//Build source code
@@ -40,46 +41,44 @@ pipeline {
 				"C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\packages\\ReportGenerator.3.1.0\\tools\\ReportGenerator.exe" "-reports:CodeCoverageResult.xml" "-targetdir:CodeCoverageReport"
 				"C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\packages\\ReportUnit.1.2.1\\tools\\ReportUnit.exe" "Reporting" "Reporting\\Result"'''
 			}
-		}//End Build source code 	
+		}
+		//End Build source code 
 		
 		stage( 'Package into zip file' ) 
 		{
 		//Build source code
 		  steps
 		  {
-			bat '"C:\\Program Files\\7-Zip\\7z.exe" a  -r DemoNunit.zip -w NunitDemo.Test\\bin\\Release\\* -mem=AES256'
+			bat '"C:\\Program Files\\7-Zip\\7z.exe" a  -r "DemoNunit.zip" -w NunitDemo.Test\\bin\\Release\\* -mem=AES256'
 			}
-		}//End Build source code 	
+		}//End Build source code
+		stage ( "Committing Tags" ){                	  
+ 			steps {
+                         bat "git tag 'v21.2'"
+			}
+		}
 		stage( "IQ Scans") {
 		  steps{
-			bat "echo 'Uploading to IQ: 'DemoNunit.zip' stage: 'release' file: 'DemoNuint.zip'"
+			bat "echo 'Uploading to IQ: 'DemoNunit' stage:'Suresh' file: 'DemoNunit.zip'"
 			nexusPolicyEvaluation failBuildOnNetworkError: false,
-				iqApplication: 'IQ_app',
+				iqApplication: 'IQ_App',
 				iqScanPatterns: [[scanPattern: 'DemoNunit.zip' ]],
 				iqStage: 'release',
 				jobCredentialsId: ''
-     		   }
-		} // stage
-		stage (" Upload to Nexus " ){
-			steps{
-                            nexusArtifactUploader artifacts: [[artifactId: 'DemoNunit', classifier: '', file: 'DemoNunit.zip', type: 'zip']
-                            credentialsId: '54ad2bda-2ac3-4da8-b241-d4e08e15a662', 
-                            groupId: 'NewRepo-group',           
-                            nexusUrl: 'localhost:9091', 
-                            nexusVersion: 'nexus3', 
-                            protocol: 'http', 
-                            repository: 'NewRepo', 
-                            version: '1.0'
-				  }
+		  }
+		} // stage	
+		stage("Upload to Repo")
+		{
+		steps{
+		nexusArtifactUploader artifacts: [[artifactId: 'DemoNunit', classifier: '', file: 'DemoNunit.zip', type: 'zip']],
+		credentialsId: '54ad2bda-2ac3-4da8-b241-d4e08e15a662', 
+		groupId: 'maven-public', 
+		nexusUrl: 'localhost:9091', 
+		nexusVersion: 'nexus3', 
+		protocol: 'http', 
+		repository: 'NewRepo', 
+		version: '1.0'
 		}
-		stage ( "Tagging" ){                	  
- 			steps {
-                         bat "git tag 'v21.1'"
-                	 bat "git config user.email 'sirishamaddineni25@gmail.com'"
-                         bat "git config user.name 'sirishamaddineni'"	
-			  
-			        					
-		}
-    		} // stage
+	}
 	}
 }
