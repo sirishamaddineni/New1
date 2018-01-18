@@ -54,7 +54,10 @@ pipeline {
 		}//End Build source code
 		stage ( " Tagging " ){                	  
  			steps {
-                         bat "git tag 'v21.7'"
+				 bat "git tag 'v21.8'"
+                         withCredentials([usernamePassword(credentialsId: 'git-pass-credentials-ID', passwordVariable: 't5aXageg', usernameVariable: 'sirishamaddineni')]) {
+                         bat ("git tag -a some_tag -m 'Jenkins'")
+                         bat ('git push https://https://github.com/sirishamaddineni/New1 --tags')
 			}
 		}
 		stage( "IQ Scans") {
