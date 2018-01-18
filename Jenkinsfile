@@ -60,8 +60,8 @@ pipeline {
 				jobCredentialsId: ''
      		   }
 		} // stage
-		stage( "Upload to Repo" ){
-                       steps{             
+		stage (" Upload to Nexus " ){
+			steps{
                             nexusArtifactUploader artifacts: [[artifactId: 'DemoNunit', classifier: '', file: 'DemoNunit.zip', type: 'zip']
                             credentialsId: 'NexusRepoCredentials', 
                             groupId: 'NewRepo-group',           
