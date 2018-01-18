@@ -81,14 +81,6 @@ pipeline {
 		repository: 'Repo1', 
 		version: '1.0'
 		}
-	}
-	stage ( 'email' )
-		{
-                 step {
-                failure {
-               bat "mail to: 'sirishamaddineni25@gmail.com'",
-		       }      
-    }
-}
+	     }
 	}
 	}
