@@ -54,12 +54,12 @@ pipeline {
 		}//End Build source code
 		stage ( " Tagging " ){                	  
  			steps {
-                         bat "git tag 'v21.5'"
+                         bat "git tag 'v21.6'"
 			}
 		}
 		stage( "IQ Scans") {
 		  steps{
-			bat "echo 'Uploading to IQ: 'DemoNunit' stage:'Suresh' file: 'DemoNunit.zip'"
+			bat "echo 'Uploading to IQ: 'DemoNunit' stage:'release' file: 'DemoNunit.zip'"
 			nexusPolicyEvaluation failBuildOnNetworkError: false,
 				iqApplication: 'IQ_App',
 				iqScanPatterns: [[scanPattern: 'DemoNunit.zip' ]],
