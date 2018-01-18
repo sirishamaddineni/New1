@@ -54,7 +54,7 @@ pipeline {
 		}//End Build source code
 		stage ( " Tagging " ){                	  
  			steps {
-                         bat "git tag 'v21.6'"
+                         bat "git tag 'v21.7'"
 			}
 		}
 		stage( "IQ Scans") {
@@ -67,7 +67,7 @@ pipeline {
 				jobCredentialsId: ''
 		  }
 		} // stage	
-		stage("Upload to Repo")
+		stage( "Upload to Nexus" )
 		{
 		steps{
 		nexusArtifactUploader artifacts: [[artifactId: 'DemoNunit', classifier: '', file: 'DemoNunit.zip', type: 'zip']],
