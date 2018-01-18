@@ -86,9 +86,8 @@ pipeline {
 		{
                  step {
                 failure {
-                mail to: 'sirishamaddineni25@gmail.com',
-             subject: "Failed Pipeline: 'currentBuild.Poc'",
-             body: "Something is wrong with 'env.http://localhost:8080/job/Poc/'"
+               bat "mail to: 'sirishamaddineni25@gmail.com'",
+		       }      
     }
 }
 	}
