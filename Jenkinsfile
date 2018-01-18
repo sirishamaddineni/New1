@@ -63,7 +63,7 @@ pipeline {
 		stage (" Upload to Nexus " ){
 			steps{
                             nexusArtifactUploader artifacts: [[artifactId: 'DemoNunit', classifier: '', file: 'DemoNunit.zip', type: 'zip']
-                            credentialsId: 'NexusRepoCredentials', 
+                            credentialsId: '54ad2bda-2ac3-4da8-b241-d4e08e15a662', 
                             groupId: 'NewRepo-group',           
                             nexusUrl: 'localhost:9091', 
                             nexusVersion: 'nexus3', 
@@ -74,7 +74,7 @@ pipeline {
 		}
 		stage ( "Tagging" ){                	  
  			steps {
-                         bat "git tag 'v21.0'"
+                         bat "git tag 'v21.1'"
                 	 bat "git config user.email 'sirishamaddineni25@gmail.com'"
                          bat "git config user.name 'sirishamaddineni'"	
 			  
