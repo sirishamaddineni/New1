@@ -52,9 +52,9 @@ pipeline {
 			bat '"C:\\Program Files\\7-Zip\\7z.exe" a  -r "DemoNunit.zip" -w NunitDemo.Test\\bin\\Release\\* -mem=AES256'
 			}
 		}//End Build source code
-		stage ( "Committing Tags" ){                	  
+		stage ( " Tagging " ){                	  
  			steps {
-                         bat "git tag 'v21.2'"
+                         bat "git tag 'v21.4'"
 			}
 		}
 		stage( "IQ Scans") {
@@ -71,12 +71,12 @@ pipeline {
 		{
 		steps{
 		nexusArtifactUploader artifacts: [[artifactId: 'DemoNunit', classifier: '', file: 'DemoNunit.zip', type: 'zip']],
-		credentialsId: '54ad2bda-2ac3-4da8-b241-d4e08e15a662', 
+		credentialsId: '5aed14d0-99ce-4bd4-bbad-b6e3014c4e28', 
 		groupId: 'maven-public', 
 		nexusUrl: 'localhost:9091', 
 		nexusVersion: 'nexus3', 
 		protocol: 'http', 
-		repository: 'NewRepo', 
+		repository: 'Repo1', 
 		version: '1.0'
 		}
 	}
