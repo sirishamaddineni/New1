@@ -43,6 +43,20 @@ pipeline {
 			}
 		}
 		//End Build source code 
+		stage( 'Report' )
+		{
+			steps
+			{
+				publishHTML([allowMissing: false,
+					     alwaysLinkToLastBuild: true,
+					     keepAll: false,
+					     reportDir: 'CodeCoverageReport',
+					     reportFiles: 'index.htm',
+					     reportName: 'Code Coverage Report',
+					     reportsTitles: 'Code Coverage Report'])
+			}
+		}
+					     
 		
 		stage( 'Package into zip file' ) 
 		{
@@ -54,7 +68,7 @@ pipeline {
 		}//End Build source code
 		stage ( " Tagging " ){                	  
  			steps {
-			       bat "git tag 'v21.11'"
+			       bat "git tag 'v21.12'"
                                bat "git config user.email 'sirishamaddineni25@gmail.com'"
                                bat "git config user.name 'sirishamaddineni'"	
 			}
