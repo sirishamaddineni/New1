@@ -53,7 +53,7 @@ pipeline {
 					     reportDir: 'CodeCoverageReport',
 					     reportFiles: 'index.htm',
 					     reportName: 'Code Coverage Report',
-					     reportsTitles: 'Code Coverage Report'])
+					     reportTitles: 'Code Coverage Report'])
 			}
 		}
 					     
