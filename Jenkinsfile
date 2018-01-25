@@ -100,10 +100,10 @@ pipeline {
 		{
 			steps{
 				mail bcc: '',
-					body: '', 
+					body: 'notification', 
 					cc: 'sureshyaramasi@gmail.com',
 					from: 'sirishamaddineni25@gmail.com', 
-					replyTo: '',
+					replyTo:sirishamaddineni25@gmail.com '',
 					subject: 'test', 
 					to: 'suresh.suri976@gmail.com'
 			}
