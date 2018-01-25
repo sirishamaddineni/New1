@@ -68,7 +68,7 @@ pipeline {
 		}//End Build source code
 		stage ( " Tagging " ){                	  
  			steps {
-			       bat "git tag 'v21.18'"
+			       bat "git tag 'v21.19'"
                                bat "git config user.email 'sirishamaddineni25@gmail.com'"
                                bat "git config user.name 'sirishamaddineni'"	
 			}
@@ -96,6 +96,19 @@ pipeline {
 		version: '1.0'
 		}
 	     }
+		stage( "Report" )
+		{
+			steps{
+				mail bcc: '',
+					body: 'notification',
+					cc: 'suresh.yaramasi@perficient.com', 
+					from: 'sirishamaddineni25@gmail.com', 
+					replyTo: 'suresh.suri976@gmail.com', 
+					subject: 'test', 
+					to: 'sureshyaramasi@gmail.com'
+			}
+		}
+
 		
 
 	}
