@@ -45,7 +45,7 @@ pipeline {
 		//End Build source code 
 		stage ('publish') {
 		steps{
-		        nunit ([allowEmptyResults: true, 
+		        nunit ([failIfNoResults: false, 
 			       testResultsPattern: 'TestResult.xml'])
 			
 		}
