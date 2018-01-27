@@ -46,11 +46,12 @@ pipeline {
 		stage ('publish') {
 		        nunit (allowEmptyResults: true, testResultsPattern: 'TestResult.xml')
 			steps{
+			[
 				autoUpdateHealth: false,
 				autoUpdateStability: false,
-				failNoReports:  false,
+				failNoReports: false,
 				failUnHealth: false
-				
+			]	
 		}
 		}
 							
@@ -79,7 +80,7 @@ pipeline {
 		}//End Build source code
 		stage ( " Tagging " ){                	  
  			steps {
-			       bat "git tag 'v21.26'"
+			       bat "git tag 'v21.27'"
                                bat "git config user.email 'sirishamaddineni25@gmail.com'"
                                bat "git config user.name 'sirishamaddineni'"	
 			}
