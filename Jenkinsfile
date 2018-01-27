@@ -46,7 +46,7 @@ pipeline {
 		stage ('publish') {
 		steps{
 		        nunit ([failIfNoResults: false, 
-			       testResultsPattern: 'TestResult.xml'])
+			       testResults: '*.xml'])
 			
 		}
 		}
@@ -76,7 +76,7 @@ pipeline {
 		}//End Build source code
 		stage ( " Tagging " ){                	  
  			steps {
-			       bat "git tag 'v21.27'"
+			       bat "git tag 'v21.28'"
                                bat "git config user.email 'sirishamaddineni25@gmail.com'"
                                bat "git config user.name 'sirishamaddineni'"	
 			}
