@@ -43,11 +43,11 @@ pipeline {
 			}
 		}
 		//End Build source code 
-		stage ( 'publish' ){
+		stage ('publish') {
 			nunit (allowEmptyResults: true, testResultsPattern: 'TestResult.xml')
 			}
 							
-		stage( 'Report' ){
+		stage( 'Report' ) {
 		            
 			steps
 			{
@@ -72,7 +72,7 @@ pipeline {
 		}//End Build source code
 		stage ( " Tagging " ){                	  
  			steps {
-			       bat "git tag 'v21.24'"
+			       bat "git tag 'v21.25'"
                                bat "git config user.email 'sirishamaddineni25@gmail.com'"
                                bat "git config user.name 'sirishamaddineni'"	
 			}
