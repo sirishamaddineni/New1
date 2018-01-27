@@ -1,3 +1,4 @@
+C:\Program Files (x86)\Jenkins\workspace\Poc\packages\NUnit.ConsoleRunner.3.7.0\tools\nunit3-console.exe
 pipeline {
     agent any
 
@@ -41,8 +42,9 @@ pipeline {
 				"C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\packages\\ReportGenerator.3.1.0\\tools\\ReportGenerator.exe" "-reports:CodeCoverageResult.xml" "-targetdir:CodeCoverageReport"
 				"C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\packages\\ReportUnit.1.2.1\\tools\\ReportUnit.exe" "Reporting" "Reporting\\Result"
 			        "C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\Nunit.Test\\bin\\Debug\\Nunit.Test.dll"'''
+	                bat ("${nunitRunner} \"C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\Nunit.Test\\bin\\Debug\\Nunit.Test.dll\" /xml=\"*.xml/")
 		  }
-		
+			
 		}
 		//End Build source code 
 		stage ('publish') {
