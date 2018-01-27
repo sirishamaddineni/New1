@@ -46,7 +46,7 @@ pipeline {
 		stage ('publish') {
 		steps{
 		        nunit ([failIfNoResults: false, 
-			       testResults: '*.xml'])
+			       testResultsPattern: '*.xml'])
 			
 		}
 		}
