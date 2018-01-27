@@ -1,4 +1,4 @@
-C:\Program Files (x86)\Jenkins\workspace\Poc\packages\NUnit.ConsoleRunner.3.7.0\tools\nunit3-console.exe
+C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\packages\\NUnit.ConsoleRunner.3.7.0\\tools\\nunit3-console.exe
 pipeline {
     agent any
 
