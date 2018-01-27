@@ -44,7 +44,7 @@ pipeline {
 		}
 		//End Build source code 
 		stage ('publish') {
-		        nunit (allowEmptyResults: true, testResultsPattern: 'TestResult.xml')
+		       // nunit (allowEmptyResults: true, testResultsPattern: 'TestResult.xml')
 			steps{
 			[
 				autoUpdateHealth: false,
@@ -56,7 +56,7 @@ pipeline {
 		}
 							
 		stage( 'Report' ) {
-		            
+		            nunit (allowEmptyResults: true, testResultsPattern: 'TestResult.xml')
 			steps
 			{
 				publishHTML([allowMissing: false,
