@@ -40,7 +40,7 @@ pipeline {
 			bat '''"C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\packages\\OpenCover.4.6.519\\tools\\OpenCover.Console.exe" -target:"C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\packages\\NUnit.ConsoleRunner.3.7.0\\tools\\nunit3-console.exe" -targetargs:"/work:Reporting --out:TestResult.txt .\\NunitDemo.Test.dll"  -output:"CodeCoverageResult.xml"
 				"C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\packages\\ReportGenerator.3.1.0\\tools\\ReportGenerator.exe" "-reports:CodeCoverageResult.xml" "-targetdir:CodeCoverageReport"
 				"C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\packages\\ReportUnit.1.2.1\\tools\\ReportUnit.exe" "Reporting" "Reporting\\Result"
-			        "C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\Nunit.Test\\bin\Debug\\Nunit.Test.dll"'''
+			        "C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\Nunit.Test\\bin\\Debug\\Nunit.Test.dll"'''
 		  }
 		
 		}
