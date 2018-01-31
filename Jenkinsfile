@@ -108,6 +108,12 @@ pipeline {
 		version: '1.0'
 		}
 	     }
+		stage( 'Extract' )
+		{
+                     steps{
+                     bat "unzip -q DemoNunit.zip"
+		   }
+		}
 		stage( "email" )
 		{
 			steps{
