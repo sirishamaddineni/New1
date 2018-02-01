@@ -1,4 +1,3 @@
-def nunitRunner = "\"C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\packages\\NUnit.ConsoleRunner.3.7.0\\tools\\nunit3-console.exe\""
 pipeline {
     agent any
 
@@ -38,21 +37,24 @@ pipeline {
 		//Build source code
 		  steps
 		  {
-			bat '''"C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\packages\\OpenCover.4.6.519\\tools\\OpenCover.Console.exe" -target:"C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\packages\\NUnit.ConsoleRunner.3.7.0\\tools\\nunit3-console.exe" -targetargs:"/work:Reporting --out:TestResult.txt .\\NunitDemo.Test.dll"  -output:"CodeCoverageResult.xml"
+			bat '''"C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\packages\\OpenCover.4.6.519\\tools\\OpenCover.Console.exe" -target:"C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\packages\\NUnit.ConsoleRunner.3.7.0\\tools\\nunit3-console.exe" -targetargs:"/work:Reporting --out:TestResult.txt .\\NunitDemo.Test.dll" -register:administrator -filter:"+[*]* -[NunitDemo.Test]*" -output:"CodeCoverageResult.xml"
 				"C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\packages\\ReportGenerator.3.1.0\\tools\\ReportGenerator.exe" "-reports:CodeCoverageResult.xml" "-targetdir:CodeCoverageReport"
-				"C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\packages\\ReportUnit.1.2.1\\tools\\ReportUnit.exe" "Reporting" "Reporting\\Result"
-	                  "C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\Nunit.Test\\bin\\Debug\\Nunit.Test.dll"'''
-                        bat ("${nunitRunner} \"C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\Nunit.Test\\bin\\Debug\\Nunit.Test.dll\" /xml=\"*.xml/")
-		 
+				"C:\\Program Files (x86)\\Jenkins\\workspace\\Poc\\packages\\ReportUnit.1.2.1\\tools\\ReportUnit.exe" "Reporting" "Reporting\\Result" "'''
+	                              
 		  }
 			
 		}
 		//End Build source code 
 		stage ('publish') {
 		steps{
-		        nunit ([failIfNoResults: false, 
-			       testResultsPattern: '*.xml'])
-			
+		        
+				publishHTML([allowMissing: false,
+					     alwaysLinkToLastBuild: true,
+					     keepAll: false,
+					     reportDir: 'Reporting/Result',
+					     reportFiles: 'index.html',
+					     reportName: 'NUnit Test Report',
+					     reportTitles: 'NUnit Test Report'])
 		}
 		}
 							
@@ -81,7 +83,7 @@ pipeline {
 		}//End Build source code
 		stage ( " Tagging " ){                	  
  			steps {
-			       bat "git tag 'v21.28'"
+			       bat "git tag 'v21.29'"
                                bat "git config user.email 'sirishamaddineni25@gmail.com'"
                                bat "git config user.name 'sirishamaddineni'"	
 			}
