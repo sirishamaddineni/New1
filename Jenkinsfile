@@ -83,7 +83,7 @@ pipeline {
 		}//End Build source code
 		stage ( " Tagging " ){                	  
  			steps {
-			       bat "git tag 'v21.30'"
+			       bat "git tag 'v21.31'"
                                bat "git config user.email 'sirishamaddineni25@gmail.com'"
                                bat "git config user.name 'sirishamaddineni'"	
 			}
@@ -115,6 +115,9 @@ pipeline {
 		stage( "email" )
 		{
 			steps{
+			       emailext body: 'not', 
+	                       recipientProviders: [[$class: 'DevelopersRecipientProvider'],
+	                       [$class: 'FailingTestSuspectsRecipientProvider']],
 				mail bcc: '',
 					body: 'notification',
 					cc: '', 
