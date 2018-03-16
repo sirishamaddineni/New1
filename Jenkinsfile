@@ -81,13 +81,7 @@ pipeline {
 			bat '"C:\\Program Files\\7-Zip\\7z.exe" a  -r "DemoNunit.zip" -w NunitDemo.Test\\bin\\Release\\* -mem=AES256'
 			}
 		}//End Build source code
-		stage ( " Tagging " ){                	  
- 			steps {
-			       bat "git tag 'v21.33'"
-                               bat "git config user.email 'sirishamaddineni25@gmail.com'"
-                               bat "git config user.name 'sirishamaddineni'"	
-			}
-		}
+		
 		stage( "IQ Scans") {
 		  steps{
 			bat "echo 'Uploading to IQ: 'DemoNunit' stage:'release' file: 'DemoNunit.zip'"
